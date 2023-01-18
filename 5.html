@@ -1,16 +1,296 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejercicio 5</title>
-</head>
-<body>
+  </head>
+  <body>
     <article>
-        <h1>Listado de usuarios</h1>
-        <p>Queremos mostrar el listado de usarios que existen en nuestro sistema y que al hacer click sobre uno de ellos nos muestre la información del usuario.</p>
-        <p>Para obtener el listado de usuarios el backend nos ha proporcionado el siguiente endpoint <a href="https://jsonplaceholder.typicode.com/users" target="_blank">Users</a>.</p>
+      <h1>Listado de usuarios</h1>
+      <p>
+        Queremos mostrar el listado de usarios que existen en nuestro sistema y
+        que al hacer click sobre uno de ellos nos muestre la información del
+        usuario.
+      </p>
+      <p>
+        Para obtener el listado de usuarios el backend nos ha proporcionado el
+        siguiente endpoint
+        <a href="https://jsonplaceholder.typicode.com/users" target="_blank"
+          >Users</a
+        >.
+      </p>
     </article>
-</body>
+    <div class="container">
+      <h1>Usuarios:</h1>
+      <div class="row" id="listado-usuarios"></div>
+    </div>
+
+    <!-- Inicia Modal -->
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal">
+      <label class="modal__bg" for="modal-1"></label>
+      <div class="modal__inner">
+        <label class="modal__close" for="modal-1"></label>
+        <h1 class="text-center">Información básica</h1>
+        <div class="row">
+          <label class="label-info col-6"
+            >Nombre: <span id="name"></span
+          ></label>
+          <label class="label-info col-6"
+            >Email: <span id="email"></span
+          ></label>
+          <label class="label-info col-6"
+            >Teléfono: <span id="phone"></span
+          ></label>
+          <label class="label-info col-6"
+            >Usuario: <span id="username"></span
+          ></label>
+          <label class="label-info col-6"
+            >Website: <span id="website"></span
+          ></label>
+        </div>
+
+        <br />
+        <hr />
+        <br />
+
+        <h1 class="text-center">Direccion</h1>
+        <div class="row">
+          <label class="label-info col-6"
+            >Calle: <span id="street"></span
+          ></label>
+          <label class="label-info col-6"
+            >Código Postal: <span id="zipcode"></span
+          ></label>
+          <label class="label-info col-6"
+            >Suite: <span id="suite"></span
+          ></label>
+          <label class="label-info col-6"
+            >Ciudad: <span id="city"></span
+          ></label>
+          <label class="label-info col-6"
+            >Latitud: <span id="lat"></span
+          ></label>
+          <label class="label-info col-6"
+            >Longitud: <span id="lng"></span
+          ></label>
+        </div>
+        <br />
+        <hr />
+        <br />
+
+        <h1 class="text-center">Compañía</h1>
+        <label class="label-info">Nombre: <span id="companyName"></span></label>
+        <label class="label-info">Frase: <span id="catchPhrase"></span></label>
+        <label class="label-info">BS: <span id="bs"></span></label>
+      </div>
+      <!-- Finaliza Modal -->
+    </div>
+
+    <script>
+      let userList = [];
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          userList = data;
+          data.forEach((element) => {
+            const ul = document.getElementById("listado-usuarios");
+            const div = document.createElement("div");
+            const label = document.createElement("label");
+            label.innerText = element.name;
+            div.setAttribute("class", "col-2 btn-label");
+            // label.setAttribute("for", "modal-1");
+            div.addEventListener("click", (event) => getInfoById(element.id));
+            div.appendChild(label);
+            ul.appendChild(div);
+          });
+        });
+
+      function getInfoById(id) {
+        if (userList.length > 0) {
+          document.getElementById("modal-1").checked =
+            !document.getElementById("modal-1").checked;
+
+          const user = userList.find((user) => user.id === id);
+          document.getElementById("name").innerText = user.name;
+          document.getElementById("phone").innerText = user.phone;
+          document.getElementById("username").innerText = user.username;
+          document.getElementById("website").innerText = user.website;
+          document.getElementById("email").innerText = user.email;
+
+          document.getElementById("city").innerText = user.address.city;
+          document.getElementById("street").innerText = user.address.street;
+          document.getElementById("zipcode").innerText = user.address.zipcode;
+          document.getElementById("suite").innerText = user.address.suite;
+          document.getElementById("lat").innerText = user.address.geo.lat;
+          document.getElementById("lng").innerText = user.address.geo.lng;
+
+          document.getElementById("companyName").innerText = user.company.name;
+          document.getElementById("catchPhrase").innerText =
+            user.company.catchPhrase;
+          document.getElementById("bs").innerText = user.company.bs;
+          console.log(user);
+        }
+      }
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* font-family: "Arial", sans-serif; */
+        font-size: 1.1em;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      p {
+        font-size: 0.9em;
+      }
+      .container {
+        margin-top: 50px;
+        width: 100%;
+      }
+
+      .row {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 5px;
+      }
+      .row div {
+        background-color: #faecd6;
+        padding: 5px;
+        border: 1px solid white;
+        border-radius: 5px;
+        text-align: center;
+        color: white;
+        transition: background-color 0.5s;
+      }
+      .col-2 {
+        width: 20%;
+      }
+      .col-6 {
+        width: 50%;
+      }
+
+      .row div:hover {
+        background-color: #f2deba;
+      }
+      .btn-label,
+      .btn-label label {
+        cursor: pointer;
+        color: #2c3639;
+      }
+
+      span {
+        font-size: 1em;
+        font-weight: lighter;
+      }
+
+      .label-info {
+        font-weight: bold;
+        display: block;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+    </style>
+    <style>
+      /*  Modal
+    * =============================== */
+      .modal {
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        text-align: left;
+        background: rgba(0, 0, 0, 0.9);
+        transition: opacity 0.25s ease;
+      }
+
+      .modal__bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+      }
+
+      .modal-state {
+        display: none;
+      }
+
+      .modal-state:checked + .modal {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-state:checked + .modal .modal__inner {
+        top: 0;
+      }
+
+      .modal__inner {
+        transition: top 0.25s ease;
+        position: absolute;
+        top: -20%;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 65%;
+        margin: auto;
+        overflow: auto;
+        background: #fff;
+        border-radius: 5px;
+        padding: 1em 2em;
+        height: 50%;
+      }
+
+      .modal__close {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+        width: 1.1em;
+        height: 1.1em;
+        cursor: pointer;
+      }
+
+      .modal__close:after,
+      .modal__close:before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 1.5em;
+        background: #ccc;
+        display: block;
+        transform: rotate(45deg);
+        left: 50%;
+        margin: -3px 0 0 -1px;
+        top: 0;
+      }
+
+      .modal__close:hover:after,
+      .modal__close:hover:before {
+        background: #aaa;
+      }
+
+      .modal__close:before {
+        transform: rotate(-45deg);
+      }
+
+      @media screen and (max-width: 768px) {
+        .modal__inner {
+          width: 90%;
+          height: 90%;
+          box-sizing: border-box;
+        }
+      }
+    </style>
+  </body>
 </html>
