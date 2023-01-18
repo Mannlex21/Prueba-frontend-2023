@@ -1,0 +1,167 @@
+:root {
+  --primary-color:#64B5F6;
+  --font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  --surface-ground:#17212f;
+  --surface-card:#1f2d40;
+  color-scheme: light dark;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
+.subject{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.subject h1 {
+    text-align: center;
+}
+
+.subject p {
+    text-align: justify;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .col-2 {
+    width: 20%;
+  }
+  .col-3 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 10px;
+  }
+  .col-6 {
+    width: 50%;
+  }
+
+body{
+    background-color: var(--surface-ground);
+}
+
+article {
+    position: relative;
+    box-shadow: none!important;
+    background: var(--surface-card)!important;
+    color: var(--surface-900);
+    font-size: 14px;
+    border-radius: 10px!important;
+    padding: 1em;
+    display: block;
+    
+    font-size: 1em;
+    text-align: left;
+    line-height: 1.5;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    hyphens: none;
+    width: auto;
+    height: 100%;
+    padding-bottom: 3em;
+}
+.image-container{
+    border-radius: 10px!important;
+    background-color: none;
+}
+
+article img {
+    display: block;
+    /* max-width:226px; */
+    /* max-height:%; */
+    width: auto;
+    height: 16em;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+}
+
+.title-article{
+    text-align: center;
+    margin-top: 10px;
+}
+.description{
+    margin-top: 10px;
+    margin-bottom: 1em;
+}
+
+.deal{
+    border-radius: 2px;
+    display: block;
+    padding: 0px 5px;
+    white-space: nowrap;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: #CC0C39;
+    /* margin-top: 10px; */
+    width: fit-content;
+}
+
+.deal-number{
+    display: inline-block;
+    color: #e25b7a!important;
+}
+.price-description{
+    display: inline-block;
+}
+.price{
+    font-weight: 700;
+}
+.btn-view, .btn-contact { 
+    display: inline-block;
+    align-self: center;
+    background-color: none;
+    border: none;
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+.btn-view{
+    margin-right: 10px;
+    color: var(--primary-color);
+    opacity: 0.5;
+}
+.btn-contact{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    color: var(--primary-color);
+    opacity: 0.3;
+    font-size: 2em;
+}
+.btn-contact:hover, .btn-view:hover{
+    opacity: 1;
+}
+.info-price {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 1em;
+    width: 100%;
+    padding: 0px 1em;
+    left: 0;
+}
+
+.info-price div{
+    display: inline-block;
+}
