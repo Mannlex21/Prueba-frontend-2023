@@ -83,8 +83,6 @@ article {
 
 article img {
     display: block;
-    /* max-width:226px; */
-    /* max-height:%; */
     width: auto;
     height: 16em;
     margin-left: auto;
@@ -109,7 +107,6 @@ article img {
     font-weight: 700;
     color: #FFFFFF;
     background: #CC0C39;
-    /* margin-top: 10px; */
     width: fit-content;
 }
 
